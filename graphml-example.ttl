@@ -1,0 +1,61 @@
+@prefix ex: <http://example.org/graphml-instance#> .
+@prefix graphml: <http://example.org/graphml#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# === GraphML документ ===
+ex:doc1 a graphml:GraphML ;
+    graphml:id "example_doc" ;
+    graphml:hasGraph ex:graph1 ;
+    graphml:hasKey ex:key_name ;
+    graphml:hasKey ex:key_weight .
+
+# === Ключи ===
+ex:key_name a graphml:Key ;
+    graphml:id "name" ;
+    graphml:for "node" ;
+    graphml:attrName "name" ;
+    graphml:attrType "string" .
+
+ex:key_weight a graphml:Key ;
+    graphml:id "weight" ;
+    graphml:for "edge" ;
+    graphml:attrName "weight" ;
+    graphml:attrType "double" .
+
+# === Граф ===
+ex:graph1 a graphml:Graph ;
+    graphml:id "G" ;
+    graphml:edgeDefault "directed" ;
+    graphml:hasNode ex:node_n0 ;
+    graphml:hasNode ex:node_n1 ;
+    graphml:hasEdge ex:edge_e0 .
+
+# === Узлы ===
+ex:node_n0 a graphml:Node ;
+    graphml:id "n0" ;
+    graphml:hasData ex:data_n0_name .
+
+ex:node_n1 a graphml:Node ;
+    graphml:id "n1" ;
+    graphml:hasData ex:data_n1_name .
+
+# === Данные узлов ===
+ex:data_n0_name a graphml:Data ;
+    graphml:value "Node A" ;
+    graphml:id "name" .
+
+ex:data_n1_name a graphml:Data ;
+    graphml:value "Node B" ;
+    graphml:id "name" .
+
+# === Рёбра ===
+ex:edge_e0 a graphml:Edge ;
+    graphml:id "e0" ;
+    graphml:hasSource ex:node_n0 ;
+    graphml:hasTarget ex:node_n1 ;
+    graphml:hasData ex:data_e0_weight .
+
+# === Данные рёбер ===
+ex:data_e0_weight a graphml:Data ;
+    graphml:value "2.5"^^xsd:double ;
+    graphml:id "weight" .

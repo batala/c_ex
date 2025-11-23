@@ -1,0 +1,96 @@
+@prefix owl: <http://www.w3.org/2003/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix graphml: <http://example.org/graphml#> .
+@prefix schema: <http://schema.org/> .
+
+# === Классы ===
+graphml:GraphML a owl:Class ;
+    rdfs:label "GraphML документ"@ru ;
+    rdfs:comment "Корневой элемент GraphML-документа."@ru .
+
+graphml:Graph a owl:Class ;
+    rdfs:label "Граф"@ru ;
+    rdfs:comment "Граф с узлами и рёбрами."@ru .
+
+graphml:Node a owl:Class ;
+    rdfs:label "Узел"@ru ;
+    rdfs:comment "Узел графа."@ru .
+
+graphml:Edge a owl:Class ;
+    rdfs:label "Ребро"@ru ;
+    rdfs:comment "Ребро графа."@ru .
+
+graphml:Key a owl:Class ;
+    rdfs:label "Ключ атрибута"@ru ;
+    rdfs:comment "Определяет тип и имя атрибута."@ru .
+
+graphml:Data a owl:Class ;
+    rdfs:label "Данные атрибута"@ru ;
+    rdfs:comment "Значение атрибута узла или ребра."@ru .
+
+# === Свойства ===
+graphml:hasGraph a owl:ObjectProperty ;
+    rdfs:domain graphml:GraphML ;
+    rdfs:range graphml:Graph ;
+    rdfs:label "имеет граф"@ru .
+
+graphml:hasNode a owl:ObjectProperty ;
+    rdfs:domain graphml:Graph ;
+    rdfs:range graphml:Node ;
+    rdfs:label "имеет узел"@ru .
+
+graphml:hasEdge a owl:ObjectProperty ;
+    rdfs:domain graphml:Graph ;
+    rdfs:range graphml:Edge ;
+    rdfs:label "имеет ребро"@ru .
+
+graphml:hasKey a owl:ObjectProperty ;
+    rdfs:domain graphml:GraphML ;
+    rdfs:range graphml:Key ;
+    rdfs:label "имеет ключ"@ru .
+
+graphml:hasData a owl:ObjectProperty ;
+    rdfs:domain [ owl:unionOf (graphml:Node graphml:Edge) ] ;
+    rdfs:range graphml:Data ;
+    rdfs:label "имеет данные"@ru .
+
+graphml:hasSource a owl:ObjectProperty ;
+    rdfs:domain graphml:Edge ;
+    rdfs:range graphml:Node ;
+    rdfs:label "имеет источник"@ru .
+
+graphml:hasTarget a owl:ObjectProperty ;
+    rdfs:domain graphml:Edge ;
+    rdfs:range graphml:Node ;
+    rdfs:label "имеет цель"@ru .
+
+graphml:for a owl:DatatypeProperty ;
+    rdfs:domain graphml:Key ;
+    rdfs:range xsd:string ;
+    rdfs:label "для (node/edge)"@ru .
+
+graphml:attrName a owl:DatatypeProperty ;
+    rdfs:domain graphml:Key ;
+    rdfs:range xsd:string ;
+    rdfs:label "имя атрибута"@ru .
+
+graphml:attrType a owl:DatatypeProperty ;
+    rdfs:domain graphml:Key ;
+    rdfs:range xsd:string ;
+    rdfs:label "тип атрибута"@ru .
+
+graphml:value a owl:DatatypeProperty ;
+    rdfs:domain graphml:Data ;
+    rdfs:range rdfs:Literal ;
+    rdfs:label "значение"@ru .
+
+graphml:id a owl:DatatypeProperty ;
+    rdfs:domain [ owl:unionOf (graphml:GraphML graphml:Graph graphml:Node graphml:Edge graphml:Key) ] ;
+    rdfs:range xsd:string ;
+    rdfs:label "идентификатор"@ru .
+
+graphml:edgeDefault a owl:DatatypeProperty ;
+    rdfs:domain graphml:Graph ;
+    rdfs:range xsd:string ;
+    rdfs:label "направление рёбер по умолчанию"@ru .
