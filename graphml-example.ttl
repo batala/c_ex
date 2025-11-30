@@ -2,6 +2,7 @@
 @prefix graphml: <http://example.org/graphml#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+
 # === GraphML документ ===
 ex:doc1 a graphml:GraphML ;
     graphml:id "example_doc" ;
