@@ -1,0 +1,123 @@
+@prefix owl: <http://www.w3.org/2003/02/21-rdf-syntax-ns#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://ont.mos.ru/graphml> .
+
+<http://ont.mos.ru/graphml> rdf:type owl:Ontology ;
+    rdfs:label "GraphML Ontology"@ru ;
+    rdfs:comment "Онтология для описания структуры GraphML без элемента <hyperedge>."@ru ;
+    owl:versionInfo "1.0" .
+
+# Классы
+
+Node rdf:type owl:Class ;
+    rdfs:label "Узел"@ru ;
+    rdfs:comment "Узел (вершина) в графе GraphML."@ru .
+
+Edge rdf:type owl:Class ;
+    rdfs:label "Ребро"@ru ;
+    rdfs:comment "Ребро (дуга) в графе GraphML."@ru .
+
+Graph rdf:type owl:Class ;
+    rdfs:label "Граф"@ru ;
+    rdfs:comment "Граф, содержащий узлы и рёбра."@ru .
+
+Key rdf:type owl:Class ;
+    rdfs:label "Ключ"@ru ;
+    rdfs:comment "Определение атрибута для узлов, рёбер или графов."@ru .
+
+Data rdf:type owl:Class ;
+    rdfs:label "Данные"@ru ;
+    rdfs:comment "Значение атрибута, присвоенное узлу, ребру или графу."@ru .
+
+# Свойства
+
+hasNode rdf:type owl:ObjectProperty ;
+    rdfs:domain Graph ;
+    rdfs:range Node ;
+    rdfs:label "имеет узел"@ru ;
+    rdfs:comment "Связывает граф с узлом."@ru .
+
+hasEdge rdf:type owl:ObjectProperty ;
+    rdfs:domain Graph ;
+    rdfs:range Edge ;
+    rdfs:label "имеет ребро"@ru ;
+    rdfs:comment "Связывает граф с ребром."@ru .
+
+source rdf:type owl:ObjectProperty ;
+    rdfs:domain Edge ;
+    rdfs:range Node ;
+    rdfs:label "источник"@ru ;
+    rdfs:comment "Узел, от которого исходит ребро."@ru .
+
+target rdf:type owl:ObjectProperty ;
+    rdfs:domain Edge ;
+    rdfs:range Node ;
+    rdfs:label "цель"@ru ;
+    rdfs:comment "Узел, в который входит ребро."@ru .
+
+hasKey rdf:type owl:ObjectProperty ;
+    rdfs:domain [ owl:unionOf ( Graph Node Edge ) ] ;
+    rdfs:range Data ;
+    rdfs:label "имеет данные"@ru ;
+    rdfs:comment "Связывает узел, ребро или граф с атрибутом (данными)."@ru .
+
+keyId rdf:type owl:DatatypeProperty ;
+    rdfs:domain Data ;
+    rdfs:range rdfs:Literal ;
+    rdfs:label "идентификатор ключа"@ru ;
+    rdfs:comment "Идентификатор ключа, к которому привязаны данные."@ru .
+
+value rdf:type owl:DatatypeProperty ;
+    rdfs:domain Data ;
+    rdfs:range rdfs:Literal ;
+    rdfs:label "значение"@ru ;
+    rdfs:comment "Значение атрибута."@ru .
+
+isDirected rdf:type owl:DatatypeProperty ;
+    rdfs:domain Edge ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "является направленным"@ru ;
+    rdfs:comment "Указывает, является ли ребро направленным."@ru .
+
+default rdf:type owl:DatatypeProperty ;
+    rdfs:domain Key ;
+    rdfs:range rdfs:Literal ;
+    rdfs:label "значение по умолчанию"@ru ;
+    rdfs:comment "Значение атрибута по умолчанию."@ru .
+
+attrName rdf:type owl:DatatypeProperty ;
+    rdfs:domain Key ;
+    rdfs:range xsd:string ;
+    rdfs:label "имя атрибута"@ru ;
+    rdfs:comment "Имя атрибута, связанного с ключом."@ru .
+
+attrType rdf:type owl:DatatypeProperty ;
+    rdfs:domain Key ;
+    rdfs:range xsd:string ;
+    rdfs:label "тип атрибута"@ru ;
+    rdfs:comment "Тип данных атрибута (string, int, double и т.д.)."@ru .
+
+forElement rdf:type owl:DatatypeProperty ;
+    rdfs:domain Key ;
+    rdfs:range xsd:string ;
+    rdfs:label "для элемента"@ru ;
+    rdfs:comment "К какому элементу применяется ключ (node, edge, graph)."@ru .
+
+graphId rdf:type owl:DatatypeProperty ;
+    rdfs:domain Graph ;
+    rdfs:range xsd:string ;
+    rdfs:label "идентификатор графа"@ru ;
+    rdfs:comment "Уникальный идентификатор графа."@ru .
+
+nodeId rdf:type owl:DatatypeProperty ;
+    rdfs:domain Node ;
+    rdfs:range xsd:string ;
+    rdfs:label "идентификатор узла"@ru ;
+    rdfs:comment "Уникальный идентификатор узла."@ru .
+
+edgeId rdf:type owl:DatatypeProperty ;
+    rdfs:domain Edge ;
+    rdfs:range xsd:string ;
+    rdfs:label "идентификатор ребра"@ru ;
+    rdfs:comment "Уникальный идентификатор ребра."@ru .
